@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Container, Button, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { DepositAction } from "../Redux/Action";
 import axios from "axios";
 
 const Home = () => {
@@ -12,16 +13,17 @@ const Home = () => {
 
   const handleCheckBalance = (e) => {
     e.preventDefault();
-    // dispatch(DepositAction(AccountNumber));
-    axios
-      .get(`http://localhost:5000/balance/${AccountNumber}`)
-      .then((res) => {
-        console.log(res);
-        setUserData(res.data.user);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    dispatch(DepositAction(AccountNumber));
+
+    // axios
+    //   .get(`http://localhost:5000/balance/${AccountNumber}`)
+    //   .then((res) => {
+    //     console.log(res);
+    //     setUserData(res.data.user);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   };
 
   return (

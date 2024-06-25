@@ -1,19 +1,25 @@
 import * as types from "./ActionTypes";
 import axios from "axios";
 
-export const DepositAction = (Money) => {
-  console.log("Money: ", Money);
-  return {
-    type: types.DEPOSIT,
-    payload: Money
+export const DepositAction = (payload) => {
+  return async (dispatch) => {
+    try {
+      const res = await axios.post(`http://localhost:5000/deposit`, payload);
+      dispatch({
+        type: types.DEPOSIT,
+        payload: res.data.user
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
 
-export const WithdrawnAction = (Money) => {
-  console.log("Money: ", Money);
+export const WithdrawnAction = (payload) => {
+  console.log("Money: ", payload);
   return {
     type: types.WITHDRAWN,
-    payload: Money
+    payload: payload
   };
 };
 

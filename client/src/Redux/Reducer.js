@@ -1,6 +1,6 @@
 import * as types from "./ActionTypes";
 
-const init = { Money: 0, Balance: null };
+const init = { userData: {}};
 
 export const Reducer = (state = init, action) => {
   const { type, payload } = action;
@@ -8,19 +8,19 @@ export const Reducer = (state = init, action) => {
     case types.DEPOSIT:
       return {
         ...state,
-        Money: state.Money + payload
+        userData: payload
       };
 
     case types.WITHDRAWN:
       return {
         ...state,
-        Money: state.Money - payload
+        userData: payload
       };
 
     case types.BALANCE:
       return {
         ...state,
-        Balance: payload
+        userData: payload
       };
 
     default:

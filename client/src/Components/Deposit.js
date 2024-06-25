@@ -6,33 +6,35 @@ import axios from "axios";
 
 const Deposit = () => {
   const dispatch = useDispatch();
-  const reduxBankData = useSelector((state) => state.BankData.Money);
+  const reduxBankData = useSelector((state) => state.BankData.userData);
+  console.log("reduxBankData: ", reduxBankData);
+
   const Money = 10;
 
   const [AccountNumber, setAccountNumber] = useState("");
   const [DepositAmount, setDepositAmount] = useState();
   const [userData, setUserData] = useState(null);
-  console.log("userData: ", userData);
 
   const handleDeposit = async (e) => {
     e.preventDefault();
-    // dispatch(DepositAction(Money));
-    await axios
-      .post("http://localhost:5000/deposit", { AccountNumber, DepositAmount })
-      .then((res) => {
-        console.log(res);
-        setUserData(res.data.user);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    dispatch(DepositAction({ AccountNumber, DepositAmount }));
+
+    // await axios
+    //   .post("http://localhost:5000/deposit", { AccountNumber, DepositAmount })
+    //   .then((res) => {
+    //     console.log(res);
+    //     setUserData(res.data.user);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   };
 
   return (
     <Container className="py-5">
       <div className=" mb-3">
-        <h3>Name: {userData?.name}</h3>
-        <h3>Balance: {userData?.balance}</h3>
+        <h3>Name: {reduxBankData?.name}</h3>
+        <h3>Balance: {reduxBankData?.balance}</h3>
       </div>
       <Form>
         <Form.Group className="mb-3" controlId="formBasicEmail">
